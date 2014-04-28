@@ -1,0 +1,79 @@
+<?php
+
+/**
+ * Processes the published comment, creates and 
+ * sends a notification message to subscribers
+ */
+function process_comment($comment, $info) {
+
+    $node = node_load($comment->nid);
+
+    // Create a new message, assigned to the comment author, and add a
+    // reference to the comment, so we can later use tokens related to that
+    // comment.
+    $message = message_create('new_comment_message', array('uid' => $comment->uid));
+    $wrapper = entity_metadata_wrapper('message', $message);
+    $wrapper->field_comment_ref->set($comment);
+
+    // We pass in the options the field names, that will be used to capture
+    // the rendered message, and provide an email log.
+    $options = array(
+  //    'rendered fields' => array(
+  //      'message_notify_email_subject' => 'field_rendered_subject',
+  //      'message_notify_email_body' => 'field_rendered_body',
+  //    ),
+    );
+
+    if (module_exists('message_subscribe')) {
+      // If Message-subscribe exists, let this module use it.
+      //message_subscribe_send_message('comment', $comment, $message, array('email' => $options));
+      message_subscribe_send_message('comment', $comment, $message);
+      watchdog('actions', $info);
+    }
+
+}
+
+/**
+ * Processes the published node, creates and
+ * sends a notification message to subscribers
+ */
+function process_node($node, $info) {
+  $message = message_create('new_topic_message', array('uid' => $node->uid));
+  $wrapper = entity_metadata_wrapper('message', $message);
+  $wrapper->field_node_ref->set($node);
+
+  // Replace explicit notification with subscription-based notification
+  // message_notify_send_message($message);
+  if (module_exists('message_subscribe')) {
+    // If Message-subscribe exists, let this example module use it.
+    message_subscribe_send_message('node', $node, $message);
+    watchdog('actions', $info);
+  }
+}
+
+/**
+ * Implements hook_comment_publish().
+ *
+ * Generates a message when a new comment is published.
+ */
+function message_notification_comment_publish($comment) {
+    $node = node_load($comment->nid);
+    $type = node_type_get_name($node);
+    $info = 'Notification has been queued for ' . $type . ' published comment.';
+    if($type == 'Poll' || $type == 'Forum topic' ) {
+      process_comment($comment, $info);
+    }
+}
+
+/**
+ * Implements hook_node_update().
+ *
+ * Generates a message when an existing node is published.
+ */
+function message_notification_node_update($node) {
+  $type = node_type_get_name($node);
+  if (isset($node->original->status) && $node->original->status == 0 && $node->status == 1 && ($type == 'Poll' || $type == 'Forum topic' )) {
+    $info = 'Message for published node ' . $node->title . ' of type ' . $type . ' has been created.';
+    process_node($node, $info);
+  }
+}

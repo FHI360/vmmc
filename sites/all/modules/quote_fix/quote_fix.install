@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * The installation script for the quote module
+ */
+
+/**
+ * Implements hook_install().
+ */
+function quote_fix_install() {
+  $t = get_t();
+  drupal_set_message($t('The Quote Fix module has been installed successfully.'));
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function quote_fix_uninstall() {
+  variable_del('quote_fix');
+
+  $t = get_t();
+  drupal_set_message($t('The Quote Fix module has been uninstalled successfully.'));
+}

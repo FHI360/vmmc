@@ -1,0 +1,19 @@
+td.views-field.views-field-views-bulk-operations {
+    width: 20px;
+}
+
+.block-views .form-select {
+    margin-left: 5%;
+    width: 90%;
+}
+
+.block-views .form-submit {
+    margin-left: 5%;
+    margin-top: 15px;
+}
+
+@media all and (min-width: 768px) {
+    .block-views .form-submit {
+       margin-top: 0;
+    }
+}

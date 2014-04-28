@@ -1,0 +1,83 @@
+.forum-post-panel-sub .author-online {
+    background: transparent url(../pictures/online.png) no-repeat;
+}
+
+.forum-post-panel-sub .author-offline {
+    background: transparent url(../pictures/offline.png) no-repeat;
+}
+
+.forum-post-links .quote {
+    
+}
+
+.indented {
+    margin-left: 25px;
+}
+
+.quote-msg, .quote-snip {
+    background: url(../pictures/quote.png) no-repeat left top;
+    padding: 20px;
+    text-indent: 40px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+
+.forum-post-panel-main {
+    width: 80%;
+}
+
+div.forum-post-panel-sub {
+    width: 18%;
+}
+
+.forum-in-reply-to {
+    display: block;
+    font-size: .8em;
+}
+
+.forum-table td, .forum-table th {
+    padding: 7px 10px;
+}
+
+.forum-table thead tr a img {
+    margin-left: 5px;
+}
+
+.forum-table .views-field-comment-count.active {
+    min-width: 100px;
+}
+
+.forum-node-create-links {
+    width: 100%;
+}
+
+.forum-table tr.even, .forum-table tr.odd {
+    border-top: 1px solid #C1C1C1;
+    background: #F7F7F7;
+    background: -webkit-gradient(linear, left top, left bottom, from(#FCFCFC), to(#F0F0F0));
+    background: -moz-linear-gradient(top, #FCFCFC, #F0F0F0);
+}
+
+.author-pane-line {
+    font-size: 0.8em;
+}
+
+.forum-post-panel-sub .author-pane .picture img {
+    max-width: 100%;
+}
+
+.forum-post-links ul.links li {
+    margin-bottom: 10px;
+}
+
+#poll-view-voting, #poll-cancel-form {
+    margin: 1em 0;
+}
+
+#forum-topic-list .views-field-title a span {
+    font-size: 14pt;
+}
+
+#forum-topic-list span.topic-icon {
+    display: block;
+}

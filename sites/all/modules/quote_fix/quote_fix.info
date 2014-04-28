@@ -1,0 +1,10 @@
+name = Quote Fix
+description = Fixes some issues with quote module.
+core = 7.x
+
+dependencies[] = quote
+
+version = "7.x-1.0"
+core = "7.x"
+project = "quote_fix"
+

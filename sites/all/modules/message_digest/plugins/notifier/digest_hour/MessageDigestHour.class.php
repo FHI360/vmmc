@@ -3,8 +3,8 @@
 /**
  * Daily email notifier.
  */
-class MessageDigestQuarter extends MessageDigest {
+class MessageDigestHour extends MessageDigest {
   public function getInterval() {
-    return '5 minutes';
+    return '1 hour';
   }
 }

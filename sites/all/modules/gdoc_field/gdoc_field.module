@@ -75,7 +75,7 @@ function gdoc_field_field_formatter_view($entity_type, $entity, $field, $instanc
     case 'gdoc_field_embedded_doc':
       foreach ($items as $delta => $item) {
         $item_uri = $item['uri'];
-        if (file_uri_scheme($item_uri) == 'public') {
+        if (file_uri_scheme($item_uri) != 'private') {
           $url = file_create_url($item_uri);
           $encoded_url = urlencode($url);
           drupal_add_css(drupal_get_path('module', 'gdoc_field') . '/gdoc_field.css');
